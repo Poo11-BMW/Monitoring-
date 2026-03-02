@@ -14,7 +14,50 @@ This project is a real-time deep learning pipeline for **action recognition in v
 - 🌐 Web-based interface with real-time predictions and dynamic graph updates
 
 ---
+## 🧠 Model Architecture
 
+```mermaid
+flowchart TD
+
+    A["UCF101 Dataset"] --> B["VideoDataset + OpenCV"]
+    B --> C["Frame Transforms\nResize + Normalize + Augment"]
+    C --> D["MobileNetV2 Backbone"]
+    D --> E["Adaptive Avg Pool 1x1"]
+    E --> F["Temporal Feature Averaging"]
+    F --> G["Dropout + Linear Layer"]
+    G --> H["Binary Output\nCrawling / Not Crawling"]
+
+    %% Color Styling
+    style A fill:#E3F2FD,stroke:#1E88E5,stroke-width:2px
+    style B fill:#E8F5E9,stroke:#43A047,stroke-width:2px
+    style C fill:#E8F5E9,stroke:#43A047,stroke-width:2px
+    style D fill:#FFF3E0,stroke:#FB8C00,stroke-width:2px
+    style E fill:#FFF3E0,stroke:#FB8C00,stroke-width:2px
+    style F fill:#F3E5F5,stroke:#8E24AA,stroke-width:2px
+    style G fill:#FCE4EC,stroke:#D81B60,stroke-width:2px
+    style H fill:#FFEBEE,stroke:#C62828,stroke-width:3px
+```
+## 🚀 Real-Time Deployment Architecture
+
+```mermaid
+flowchart TD
+
+    A[Webcam / Video Source] --> B[Flask Server]
+    B --> C[Frame Queue]
+    C --> D[Background Thread]
+    D --> E[Model Inference]
+    E --> F[SocketIO Real-Time Updates]
+    F --> G[Web UI<br/>Live Video + Graph]
+
+    %% Color Styling
+    style A fill:#E1F5FE,stroke:#0288D1,stroke-width:2px
+    style B fill:#E8EAF6,stroke:#3949AB,stroke-width:2px
+    style C fill:#F1F8E9,stroke:#7CB342,stroke-width:2px
+    style D fill:#FFF8E1,stroke:#F9A825,stroke-width:2px
+    style E fill:#F3E5F5,stroke:#8E24AA,stroke-width:2px
+    style F fill:#FCE4EC,stroke:#D81B60,stroke-width:2px
+    style G fill:#FFEBEE,stroke:#C62828,stroke-width:3px
+```
 ## 🧠 Model Overview
 
 ### Custom Model: `BabyCrawlingModel`
